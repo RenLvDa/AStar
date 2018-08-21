@@ -39,6 +39,7 @@ public class FindPath : MonoBehaviour {
 
 			if (currentNode == endNode) {
 				//生成寻路
+				generatePath(startNode,endNode);
 				return;
 			}
 
@@ -46,8 +47,35 @@ public class FindPath : MonoBehaviour {
 				if (!node.walkable || closeList.Contains (node))
 					continue;
 
+				int newCont = currentNode.gCost + getDistanceNodes (currentNode, node);
+				if (newCont < node.gCost || !openList.Contains (node)) {
+					
+				}
 
 			}
 		}
+	}
+
+	private void getDistanceNodes(Node a,Node b){
+		int cntX = Mathf.Abs (a.gridX - b.gridX);
+		int cntY = Mathf.Abs (a.gridY - b.gridY);
+
+		if (cntX >= cntY)
+			return 14 * cntY + 10 * (cntX - cntY);
+		else
+			return 14 * cntX + 10 * (cntY - cntX);
+	}
+
+	private void generatePath(Node startNode,Node endNode){
+		List<Node> path = new List<Node> ();
+		Node temp = endNode;
+
+		while (temp != startNode) {
+			path.Add (temp);
+			temp = temp.parent;
+		}
+
+		path.Reverse ();
+		_grid.path = path;
 	}
 }
