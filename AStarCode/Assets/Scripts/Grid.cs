@@ -41,6 +41,7 @@ public class Grid : MonoBehaviour {
 			foreach (var node in path) {
 				Gizmos.color = Color.black;
 				Gizmos.DrawCube (node.worldPos, Vector3.one * (nodeDiameter - 0.1f));
+				Debug.Log (node.gridX + " " + node.gridY);
 			}
 		}
 
@@ -69,7 +70,7 @@ public class Grid : MonoBehaviour {
 
 	public Node GetFromPosition(Vector3 pos){
 		float percentX = (pos.x + gridSize.x / 2) / gridSize.x;
-		float percentY = (pos.y + gridSize.y / 2) / gridSize.y;
+		float percentY = (pos.z + gridSize.y / 2) / gridSize.y;
 
 		percentX = Mathf.Clamp01 (percentX);
 		percentY = Mathf.Clamp01 (percentY);
@@ -90,7 +91,7 @@ public class Grid : MonoBehaviour {
 				int tempX = node.gridX + i;
 				int tempY = node.gridY + j;
 
-				if (tempX < gridCntX && tempX > 0 && tempY > 0 && tempY < gridCntY)
+				if (tempX < gridCntX && !(tempX < 0) && !(tempY < 0) && tempY < gridCntY)
 					neibourhood.Add (grid [tempX, tempY]);
 			}
 		}

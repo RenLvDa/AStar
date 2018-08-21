@@ -12,16 +12,15 @@ public class FindPath : MonoBehaviour {
 	}
 
 	void Update () {
-		
+		findingPath (player.position, endPoint.position);
 	}
 
 	private void findingPath(Vector3 startPos,Vector3 endPos){
 		Node startNode = _grid.GetFromPosition (startPos);
 		Node endNode = _grid.GetFromPosition (endPos);
 
-
 		List<Node> openList = new List<Node> ();
-		List<Node> closeList = new HashSet<Node> ();
+		HashSet<Node> closeList = new HashSet<Node> ();
 		openList.Add (startNode);
 
 		while (openList.Count > 0) {
@@ -49,14 +48,20 @@ public class FindPath : MonoBehaviour {
 
 				int newCont = currentNode.gCost + getDistanceNodes (currentNode, node);
 				if (newCont < node.gCost || !openList.Contains (node)) {
-					
+					node.gCost = newCont;
+					node.hCost = getDistanceNodes (node, endNode);
+					node.parent = currentNode;
+
+					if (!openList.Contains (node)) {
+						openList.Add (node);
+					}
 				}
 
 			}
 		}
 	}
 
-	private void getDistanceNodes(Node a,Node b){
+	private int getDistanceNodes(Node a,Node b){
 		int cntX = Mathf.Abs (a.gridX - b.gridX);
 		int cntY = Mathf.Abs (a.gridY - b.gridY);
 
