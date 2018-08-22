@@ -65,10 +65,11 @@ public class FindPath : MonoBehaviour {
 		int cntX = Mathf.Abs (a.gridX - b.gridX);
 		int cntY = Mathf.Abs (a.gridY - b.gridY);
 
-		if (cntX >= cntY)
-			return 14 * cntY + 10 * (cntX - cntY);
-		else
-			return 14 * cntX + 10 * (cntY - cntX);
+		return cntX + cntY;
+//		if (cntX >= cntY)
+//			return 14 * cntY + 10 * (cntX - cntY);
+//		else
+//			return 14 * cntX + 10 * (cntY - cntX);
 	}
 
 	private void generatePath(Node startNode,Node endNode){
