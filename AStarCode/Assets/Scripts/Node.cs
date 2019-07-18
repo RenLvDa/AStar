@@ -22,6 +22,8 @@ public class Node{
 	public Node parent;
 
 	public Node(bool isWall, Vector3 pos,int x,int y){
+        hCost = 0;
+        gCost = 0;
 		this.walkable = isWall;
 		this.worldPos = pos;
 		this.gridX = x;

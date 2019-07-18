@@ -9,7 +9,7 @@ public class Grid : MonoBehaviour {
 	public float nodeRadius;
 	public float nodeDiameter;
 	public LayerMask whatLayer;
-	public int gridCntX, gridCntY;
+	public int gridCntX, gridCntY; //格子两个方向上的node数量
 	public Transform player;
 	public List<Node> path;
 
