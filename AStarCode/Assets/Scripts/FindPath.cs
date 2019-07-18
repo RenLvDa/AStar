@@ -55,8 +55,9 @@ public class FindPath : MonoBehaviour {
 				if (newCont < node.gCost || !openList.Contains (node)) {
 					node.gCost = newCont;
 					node.hCost = getDistanceNodes (node, endNode);
+                    //将node的父节点设置为currentNode
 					node.parent = currentNode;
-
+                    //如果OpenList没有node则将OpenList加入node
 					if (!openList.Contains (node)) {
 						openList.Add (node);
 					}
